@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+    <link rel="stylesheet" href="style.css">
 <head>
     <title>Password Strength Checker</title>
     <style>
@@ -37,7 +38,7 @@
 
 
 
-<!-- programe no 3 -->
+<!-- programe no 2 -->
 <div class="container">
     <h2>Image Carousel</h2>
     <img id="image" src="./pics/nice.jpg" alt="Carousel Image" width="500px">
@@ -46,13 +47,34 @@
     <button onclick="nextImage()">Next</button>
 </div>
 
+<!-- programe no 3 -->
 
+<h1>Countdown Clock</h1>
+	<label>Hours:</label>
+	<input type="number" id="hours" min="0" max="24">
+	<label>Minutes:</label>
+	<input type="number" id="minutes" min="0" max="59">
+	<label>Seconds:</label>
+	<input type="number" id="seconds" min="0" max="59">
+	<button onclick="startCountdown()">Start Countdown</button>
+	<br><br>
+	<div id="countdown"></div>
 
+<!-- programe no 4 -->
+<h1>Question and Answer</h1>
 
-
-
-
-
+<div class="card" id="card">
+    <div class="card-inner">
+        <div class="card-front">
+            <h2 id="question"></h2>
+        </div>
+        <div class="card-back">
+            <h2 id="answer"></h2>
+        </div>
+    </div>
+</div>
+<button id="flip-button">Flip</button>
+<button id="next-button">Next</button>
 
 
 
