@@ -45,7 +45,7 @@ function checkPasswordStrength() {
     }
 }
 
-// Proframe  no 2 -------------------------------------->
+// Proframe  no 2 ------------------------------------------------------------>
 var imageUrls = [
     "./pics/b4.jpg",
     "./pics/f1.jpg",
@@ -79,33 +79,54 @@ function nextImage() {
 // Initial display
 displayImage();
 
-// programe no 3 -----------------------------------------
+// programe no 3 ------------------------------------------------------
+
+var countdownInterval;
+var countdownElement = document.getElementById("countdown");
+var hoursInput = document.getElementById("hoursInput");
+var minutesInput = document.getElementById("minutesInput");
+var secondsInput = document.getElementById("secondsInput");
 
 function startCountdown() {
-	var hours = parseInt(document.getElementById("hours").value);
-	var minutes = parseInt(document.getElementById("minutes").value);
-	var seconds = parseInt(document.getElementById("seconds").value);
+    var hours = parseInt(hoursInput.value);
+    var minutes = parseInt(minutesInput.value);
+    var seconds = parseInt(secondsInput.value);
 
-	var totalSeconds = hours * 3600 + minutes * 60 + seconds;
+    var totalSeconds = hours * 3600 + minutes * 60 + seconds;
 
-	var countdown = setInterval(function() {
-	if (totalSeconds <= 0) {
-			clearInterval(countdown);
-			alert("Countdown complete!");
-			return;
-		}
+    if (isNaN(totalSeconds) || totalSeconds <= 0) {
+        alert("Please enter a valid countdown time.");
+        return;
+    }
 
-		var hoursRemaining = Math.floor(totalSeconds / 3600);
-		var minutesRemaining = Math.floor((totalSeconds % 3600) / 60);
-		var secondsRemaining = totalSeconds % 60;
+    hoursInput.disabled = true;
+    minutesInput.disabled = true;
+    secondsInput.disabled = true;
 
-		document.getElementById("countdown").innerHTML = hoursRemaining + "h " + minutesRemaining + "m " + secondsRemaining + "s";
+    countdownInterval = setInterval(function() {
+        totalSeconds--;
 
-		totalSeconds--;
-	}, 1000);
+        if (totalSeconds <= 0) {
+            clearInterval(countdownInterval);
+            countdownElement.textContent = "Countdown finished!";
+            alert("Countdown finished!");
+        } else {
+            var remainingHours = Math.floor(totalSeconds / 3600);
+            var remainingMinutes = Math.floor((totalSeconds % 3600) / 60);
+            var remainingSeconds = totalSeconds % 60;
+
+            countdownElement.textContent = formatTime(remainingHours) + " : " +
+                                            formatTime(remainingMinutes) + " : " +
+                                            formatTime(remainingSeconds);
+        }
+    }, 1000);
 }
 
-// programe no 4-----------------------------
+function formatTime(time) {
+    return time.toString().padStart(2, "0");
+}
+
+// programe no 4-------------------------------------------------
 var flashcards = [
     {
         question: "What is the capital of Pakistan?",
@@ -165,10 +186,33 @@ function displayCard() {
     card.style.transform = "rotateY(0deg)";
 }
 
+// program no 5------------------------------------------------------------------
 
 
+var words = ["javascript", "programming", "computer", "algorithm", "variable", "function"];
+
+var randomIndex = Math.floor(Math.random() * words.length);
+var word = words[randomIndex];
+
+// Scramble the letters in the word
+let scrambledWord = "";
+for (let i = 0; i < word.length; i++) {
+  const randomIndex = Math.floor(Math.random() * word.length);
+  scrambledWord += word[randomIndex];
+}
+
+// Display the scrambled word to the user
+alert("The scrambled word is: " + scrambledWord);
 
 
+var guess = prompt("Enter your guess:");
+
+// Check if the guess is correct
+if (guess === word) {
+  alert("Congratulations, you unscrambled the word!");
+} else {
+  alert("Sorry, that's incorrect. The word was: " + word);
+}
 
 
 
